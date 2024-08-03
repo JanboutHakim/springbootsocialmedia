@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns.ths="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add post</title>
+</head>
+<body>
+<h1>ADD POST</h1>
+<form method="post" th:object="${post}" th:action="@{'/addpost'}">
+    <label>
+        <input  name="username" th:field="*{subject}" placeholder="Subject">
+    </label>
+    <button>ADD</button>
+<div style="padding-top: 50px">
+    <textarea style="width: 400px;height: 400px" th:field="*{text}" ></textarea>
+</div>
+
+</form>
+
+</body>
+</html>

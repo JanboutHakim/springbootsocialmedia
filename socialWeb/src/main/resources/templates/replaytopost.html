@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns.ths="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Replay </title>
+</head>
+<body>
+    <form method="post" th:object="${replay}" th:action="@{'/addedreplay?id=' + ${postid}}">
+        <div><label>
+            <textarea style="width: 400px;height: 400px" th:field="*{text}"></textarea>
+        </label></div>
+        <button >Add Replay</button>
+
+    </form>
+</body>
+</html>

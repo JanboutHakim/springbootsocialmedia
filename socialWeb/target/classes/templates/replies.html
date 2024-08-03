@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns.ths="http://www.thymeleaf.org" lang="en">
+<style>
+    .posts {
+        margin-top: 20px;
+    }
+
+    .post {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="posts" >
+    <div class="post">
+        <h2 th:text="${postid.user.getFullName()}"></h2>
+        <h3 th:text="${postid.subject}" ></h3>
+        <p th:text="${postid.text}"></p>
+        <button class="like" th:text="${postid.up}"></button>
+        <label th:text="${postid.up}"></label>
+        <button class="dislike" >Dislike</button>
+        <label th:text="${postid.up}">12</label>
+        <button style="margin-left: 50px" class="reply"th:onclick="'getPostId(' + ${postid.postId} + ')'" >Reply</button>
+
+    </div>
+</div >
+<div th:each="rep:${replies}">
+<hr></hr>
+<div >
+    <h1 th:text="${rep.userReplay.getFullName()}"></h1>
+    <p th:text="${rep.text}"></p>
+</div>
+<hr></hr>
+</div>
+
+<script>
+    function getPostId(id){
+        window.location.href = '/replaytopost?id=' + id;
+    }
+</script>
+</body>
+</html>

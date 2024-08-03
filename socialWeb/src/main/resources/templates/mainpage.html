@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns.ths="http://www.thymeleaf.org"
+      lang="en">
+<style>
+    /* styles.css */
+
+    /* Header styles */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f0f0f0;
+    }
+
+    .profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .search input {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Post styles */
+    .add-post {
+        margin-top: 20px;
+    }
+
+    .posts {
+        margin-top: 20px;
+    }
+
+    .post {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .like, .dislike, .reply, .view-replies {
+        margin-right: 10px;
+        padding: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Other styles (customize as needed) */
+    /* ... */
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>My Social Page</title>
+</head>
+<body>
+<header>
+
+    <div class="profile">
+        <img style="width: 100px;height: 100px" th:src="@{${user.getProfilePicturePath()}}" alt="profile-picture" >
+        <label style="padding-left: 20px" th:text="${user.getFullName()}"></label>
+    </div>
+    <button onclick="location.href='/logoutsuccses'">Logout</button>
+    <form method="get" th:action="@{'/searchpost'}" th:object="${word}">
+    <div class="search">
+        <label>
+            <input type="text"  name="word" placeholder="Search...">
+        </label>
+        <button  >Search</button>
+    </div>
+    </form>
+</header>
+
+<main>
+    <div class="add-post">
+        <button onclick="location.href='/addpost'">Add Post</button>
+    </div>
+    <div class="posts" th:each="post:${posts}">
+        <!-- Example post -->
+        <div class="post">
+            <h2 th:text="${post.user.getFullName()}"></h2>
+            <h3 th:text="${post.subject}"></h3>
+            <p th:text="${post.text}"></p>
+            <button class="like" th:onclick="'like(' + ${post.postId} + ')'">Like</button>
+            <label th:text="${post.up}"></label>
+            <button class="dislike" th:onclick="'dislike(' + ${post.postId} + ')'" >Dislike</button>
+            <label th:text="${post.down}"></label>
+            <button style="margin-left: 50px" class="reply" th:onclick="'getPostId(' + ${post.postId} + ')'">Reply</button>
+            <button class="view-replies" th:onclick="'viewReplies(' + ${post.postId} + ')'">View Replies</button>
+            <button class="view-replies" th:onclick="'editpost(' + ${post.postId} + ')'">Edit Post</button>
+        </div>
+        <!-- More posts go here -->
+    </div>
+</main>
+
+<script>
+    function like(id)
+    {
+        window.location.href = '/addlike?id=' + id;
+    }
+    function dislike(id){
+        window.location.href = '/dislike?id=' + id;
+
+    }
+    function getPostId(id){
+        window.location.href = '/replaytopost?id=' + id;
+    }
+    function viewReplies(id){
+        window.location.href = '/viewReplies?id=' + id;
+
+    }
+    function editpost(id){
+        window.location.href = '/editpost?id=' + id;
+
+    }
+
+</script>
+</body>
+</html>
